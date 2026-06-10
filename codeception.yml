@@ -1,0 +1,16 @@
+namespace: Tests
+support_namespace: Support
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/Support
+    envs: tests/_envs
+settings:
+    shuffle: false
+    lint: true
+params:
+    # Environment variables are loaded from the .env file at the project root.
+    # In a real deployment, CI would inject these instead.
+    - .env
+bootstrap: _bootstrap.php

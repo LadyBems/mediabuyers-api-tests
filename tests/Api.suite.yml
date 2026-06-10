@@ -1,0 +1,26 @@
+# Suite configuration for the API tests.
+#
+# The REST module is the primary driver. It is layered on top of PhpBrowser,
+# which performs the actual HTTP transport. Asserts gives us framework-level
+# assertions (assertSame, assertCount, ...) inside the Cest classes.
+#
+# The base URL is resolved from configuration (%BASE_URL%), never hard-coded
+# in a test. Switching environments is a matter of changing one env var.
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+              depends: PhpBrowser
+              url: "%BASE_URL%/api"
+        - Asserts
+        - \Tests\Support\Helper\JsonSchema
+    config:
+        PhpBrowser:
+            url: "%BASE_URL%"
+        REST:
+            # Content negotiation headers required by the contract conventions.
+            # They are applied to every request unless a test overrides them.
+            headers:
+                Content-Type: application/json
+                Accept: application/json
+step_decorators: ~
